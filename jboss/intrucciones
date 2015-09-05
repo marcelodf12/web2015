@@ -1,3 +1,13 @@
+Fuente:
+http://blog.hatemalimam.com/create-jsf-2-1-using-maven-jboss-as-7-postgres-eclipse/
+
+copiar la carpeta postgresql dentro de
+jboss/modules/org/
+
+En el jboss/standalone/deployments no tiene que haber nada (excepto el README.txt que siempre esta creo)
+
+
+
 esto tiene que estar en en standalone.xml
 
 <datasources>

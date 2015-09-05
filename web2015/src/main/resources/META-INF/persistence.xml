@@ -8,6 +8,8 @@
       <!-- If you are running in a production environment, add a managed 
          data source, the example data source is just for proofs of concept! -->
       <jta-data-source>java:/jdbc/webDS</jta-data-source>
+      <class>com.ha.model.Venta</class>
+      <class>com.ha.model.Member</class>
       <properties>
          <!-- Properties for Hibernate -->
          <property name="hibernate.hbm2ddl.auto" value="create-drop" />
