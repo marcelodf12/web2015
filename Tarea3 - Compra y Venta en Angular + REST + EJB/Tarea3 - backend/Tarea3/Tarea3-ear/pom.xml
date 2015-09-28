@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+        <artifactId>Tarea3</artifactId>
+        <groupId>py.pol.una.web.tarea3</groupId>
+        <version>0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>Tarea3-ear</artifactId>
+  <packaging>ear</packaging>
+  <name>Tarea3-ear</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+	<dependencies>
+  		<dependency>
+            <groupId>py.pol.una.web.tarea3</groupId>
+            <artifactId>Tarea3-model</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>py.pol.una.web.tarea3</groupId>
+            <artifactId>Tarea3-ejb</artifactId>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>py.pol.una.web.tarea3</groupId>
+            <artifactId>Tarea3-web</artifactId>
+            <type>war</type>
+        </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+    	<plugin>
+		<groupId>org.jboss.as.plugins</groupId>
+		<artifactId>jboss-as-maven-plugin</artifactId>
+		<configuration>
+			<filename>Tarea3-ear-0.1-SNAPSHOT.ear</filename>
+			<skip>false</skip>
+		</configuration>
+	</plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ear-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+            <version>6</version>
+            <defaultLibBundleDir>lib</defaultLibBundleDir>
+            <modules>
+            	<ejbModule>
+            			<groupId>py.pol.una.web.tarea3</groupId>
+        				<artifactId>Tarea3-ejb</artifactId>
+            	</ejbModule>
+            	<jarModule>
+            			<groupId>py.pol.una.web.tarea3</groupId>
+        				<artifactId>Tarea3-model</artifactId>
+            	</jarModule>
+            	<webModule>
+            			<groupId>py.pol.una.web.tarea3</groupId>
+        				<artifactId>Tarea3-web</artifactId>
+            	</webModule>
+            </modules>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

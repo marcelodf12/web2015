@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>py.pol.una.web.tarea3</groupId>
+  <artifactId>Tarea3</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Tarea3</name>
+  <dependencyManagement>
+       <dependencies>
+           <dependency>
+               <groupId>py.pol.una.web.tarea3</groupId>
+               <artifactId>Tarea3-ejb</artifactId>
+               <version>0.1-SNAPSHOT</version>
+               <type>ejb</type>
+           </dependency>
+           <dependency>
+            <groupId>py.pol.una.web.tarea3</groupId>
+           	<artifactId>Tarea3-model</artifactId>
+           	<version>0.1-SNAPSHOT</version>
+           </dependency>
+           <dependency>
+            <groupId>py.pol.una.web.tarea3</groupId>
+           	<artifactId>Tarea3-web</artifactId>
+           	<version>0.1-SNAPSHOT</version>
+           	<type>war</type>
+           </dependency>
+       </dependencies>
+   </dependencyManagement>
+  <modules>
+  	<module>Tarea3-model</module>
+    <module>Tarea3-ejb</module>
+    <module>Tarea3-web</module>
+    <module>Tarea3-ear</module>
+  </modules>
+</project>

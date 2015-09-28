@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app= "tarea3">
+<head>
+	<title>::TAREA 3::</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <meta charset="utf-8" />
+</head>
+<body>
+	<div class="container" ng-controller= "controlador">
+		<header align="center">
+			<h1> Ventas </h1>
+		</header>
+		<div class="row">
+            <div class="col-lg-10">
+                <input class="form-control" placeholder="Filtrado General..." ng-model="filtro" name="filtro"/>
+            </div>
+            <div class="col-lg-2">
+                <button class="btn btn-default" ng-click="busquedaGeneral(filtro)">BUSCAR</button>
+            </div>
+	    </div>
+        <br />
+        <form>
+            <div class="row">
+                <div class="col-lg-4">
+                    <select class="form-control" ng-model="categoria">
+                        <option value="" disabled selected>Filtro por categor&iacute;as</option>
+                        <option value="by_numero" selected>N&uacute;mero</option>
+                        <option value="by_monto_total">Monto Total</option>
+                        <option value="by_nombre_cliente">Nombre Cliente</option>
+                        <option value="by_ruc_cliente">RUC Cliente</option>
+                        <option value="by_fecha">Fecha</option>
+                    </select>
+                </div>
+                <div class="col-lg-6">
+                    <input class="form-control" placeholder="Ingrese filtro" ng-model="filtroPorCategorias" name="filtroPorCategorias"/>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-default" ng-click="buscarPorCategorias(categoria, filtroPorCategorias)">BUSCAR POR CATEGOR&Iacute;AS</button>
+                </div>
+            </div>
+        </form>
+	    <br />
+        <br />
+	    <div class="row">
+		  	<table class="table table-hover">
+			    <tr>
+			      	<th>N&uacute;mero 
+                        <button class="btn btn-default" ng-click="ordenar('numero', 'ASC')" ng-show="numOrd">&uArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('numero', 'DESC')" ng-hide="numOrd">&dArr;</button>
+                    </th>
+			      	<th>Monto Total
+                        <button class="btn btn-default" ng-click="ordenar('monto_total', 'ASC')" ng-show="monOrd">&uArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('monto_total', 'DESC')" ng-hide="monOrd">&dArr;</button>
+                    </th>
+			      	<th>Nombre Cliente
+                        <button class="btn btn-default" ng-click="ordenar('nombre_cliente', 'ASC')" ng-show="nomOrd">&uArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('nombre_cliente', 'DESC')" ng-hide="nomOrd">&dArr;</button>
+                    </th>
+			      	<th>RUC Cliente
+                        <button class="btn btn-default" ng-click="ordenar('ruc_cliente', 'ASC')" ng-show="rucOrd">&uArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('ruc_cliente', 'DESC')" ng-hide="rucOrd">&dArr;</button>
+                    </th>
+			      	<th>Fecha
+                        <button class="btn btn-default" ng-click="ordenar('fecha', 'ASC')" ng-show="fecOrd">&uArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('fecha', 'DESC')" ng-hide="fecOrd">&dArr;</button>
+                    </th>
+			    </tr>
+		    	<tr ng-repeat="venta in ventas" ng-dblclick="obtener(venta)">
+			     	<td>{{venta.numero}}</td>
+			      	<td>{{venta.montoTotal}}</td>
+			      	<td>{{venta.nombreCliente}}</td>
+			      	<td>{{venta.rucCliente}}</td>
+			      	<td>{{venta.fecha}}</td>
+		    	</tr>
+		  	</table>	
+		  	<div ng-if="ventas.length == 0"><strong>Sin resultados</strong></div>
+	    	<div class="midirectiva"></div>
+		</div>
+        <div class="row">
+            <div class="col-lg-4">
+                <button class="btn btn-default" ng-click="paginar(1)" ng-disabled="parametros.page==1 || paginacion.totalPages==0">PRIMERA PAGINA</button>
+            </div>
+            <div class="col-lg-4" align="center">
+                <button class="btn btn-default" ng-click="paginar(parametros.page-1)" ng-disabled="parametros.page==1 || paginacion.totalPages==0">ANTERIOR</button>
+                <button class="btn btn-default" ng-click="paginar(parametros.page+1)" ng-disabled="parametros.page==paginacion.totalPages || paginacion.totalPages==0">SIGUIENTE</button>
+            </div>    
+            <div class="col-lg-4" align="right">
+                <button class="btn btn-default" ng-click="paginar(paginacion.totalPages)" ng-disabled="parametros.page==paginacion.totalPages || paginacion.totalPages==0">ULTIMA PAGINA</button>
+            </div>    
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-4" align="center">
+                <span>P&aacute;gina {{parametros.page}} de {{paginacion.totalPages}}</span>
+            </div>
+        </div>
+	</div>
+    <script type="text/javascript" src= "angular.min.js"></script>
+    <script type="text/javascript" src= "implementacion.js"></script>
+</body>
+</html>
