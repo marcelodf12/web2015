@@ -1,102 +1,123 @@
 <!DOCTYPE html>
-<html ng-app= "tarea3">
-<head>
-	<title>::TAREA 3::</title>
-	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-    <meta charset="utf-8" />
-</head>
-<body>
-	<div class="container" ng-controller= "controlador">
-		<header align="center">
-			<h1> Ventas </h1>
-		</header>
-		<div class="row">
-            <div class="col-lg-10">
-                <input class="form-control" placeholder="Filtrado General..." ng-model="filtro" name="filtro"/>
-            </div>
-            <div class="col-lg-2">
-                <button class="btn btn-default" ng-click="busquedaGeneral(filtro)">BUSCAR</button>
-            </div>
-	    </div>
-        <br />
-        <form>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html ng-app="App"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!--<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">-->
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="angular/angular.min.js"></script>
+        <script src="js/apps.js"></script>
+        <script src="js/common/ventas/ventasListarCtrl.js"></script>
+        
+        
+        
+        <script src="angular/angular-route.js"></script>
+
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
             <div class="row">
-                <div class="col-lg-4">
-                    <select class="form-control" ng-model="categoria">
-                        <option value="" disabled selected>Filtro por categor&iacute;as</option>
-                        <option value="by_numero" selected>N&uacute;mero</option>
-                        <option value="by_monto_total">Monto Total</option>
-                        <option value="by_nombre_cliente">Nombre Cliente</option>
-                        <option value="by_ruc_cliente">RUC Cliente</option>
-                        <option value="by_fecha">Fecha</option>
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    <input class="form-control" placeholder="Ingrese filtro" ng-model="filtroPorCategorias" name="filtroPorCategorias"/>
-                </div>
-                <div class="col-lg-2">
-                    <button class="btn btn-default" ng-click="buscarPorCategorias(categoria, filtroPorCategorias)">BUSCAR POR CATEGOR&Iacute;AS</button>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <!-- Header -->
+                    <h1>Universidad Nacional de Asunci&oacuten - Facultad Polit&eacutecnica</h1>
+                    <h2> Programacion Web</h2>
+                    <!-- End-Header -->
                 </div>
             </div>
-        </form>
-	    <br />
-        <br />
-	    <div class="row">
-		  	<table class="table table-hover">
-			    <tr>
-			      	<th>N&uacute;mero 
-                        <button class="btn btn-default" ng-click="ordenar('numero', 'ASC')" ng-show="numOrd">&uArr;</button>
-                        <button class="btn btn-default" ng-click="ordenar('numero', 'DESC')" ng-hide="numOrd">&dArr;</button>
-                    </th>
-			      	<th>Monto Total
-                        <button class="btn btn-default" ng-click="ordenar('monto_total', 'ASC')" ng-show="monOrd">&uArr;</button>
-                        <button class="btn btn-default" ng-click="ordenar('monto_total', 'DESC')" ng-hide="monOrd">&dArr;</button>
-                    </th>
-			      	<th>Nombre Cliente
-                        <button class="btn btn-default" ng-click="ordenar('nombre_cliente', 'ASC')" ng-show="nomOrd">&uArr;</button>
-                        <button class="btn btn-default" ng-click="ordenar('nombre_cliente', 'DESC')" ng-hide="nomOrd">&dArr;</button>
-                    </th>
-			      	<th>RUC Cliente
-                        <button class="btn btn-default" ng-click="ordenar('ruc_cliente', 'ASC')" ng-show="rucOrd">&uArr;</button>
-                        <button class="btn btn-default" ng-click="ordenar('ruc_cliente', 'DESC')" ng-hide="rucOrd">&dArr;</button>
-                    </th>
-			      	<th>Fecha
-                        <button class="btn btn-default" ng-click="ordenar('fecha', 'ASC')" ng-show="fecOrd">&uArr;</button>
-                        <button class="btn btn-default" ng-click="ordenar('fecha', 'DESC')" ng-hide="fecOrd">&dArr;</button>
-                    </th>
-			    </tr>
-		    	<tr ng-repeat="venta in ventas" ng-dblclick="obtener(venta)">
-			     	<td>{{venta.numero}}</td>
-			      	<td>{{venta.montoTotal}}</td>
-			      	<td>{{venta.nombreCliente}}</td>
-			      	<td>{{venta.rucCliente}}</td>
-			      	<td>{{venta.fecha}}</td>
-		    	</tr>
-		  	</table>	
-		  	<div ng-if="ventas.length == 0"><strong>Sin resultados</strong></div>
-	    	<div class="midirectiva"></div>
-		</div>
-        <div class="row">
-            <div class="col-lg-4">
-                <button class="btn btn-default" ng-click="paginar(1)" ng-disabled="parametros.page==1 || paginacion.totalPages==0">PRIMERA PAGINA</button>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <!-- Menu-Superior	-->
+                    <nav class="navbar navbar-default">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                                <span class="sr-only">Cambiar navegacion</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Proveedores<b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#/proveedor/alta">Nuevo</a></li>
+                                            <li><a href="#/proveedor/listar">Listar</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Productos<b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#/producto/alta">Nuevo</a></li>
+                                            <li><a href="#/producto/listar">Listar</a></li>
+                                        </ul>
+                                    </li>
+
+
+                                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Clientes<b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#/cliente/alta">Nuevo</a></li>
+                                            <li><a href="#/cliente/listar">Listar</a></li>
+                                        </ul>
+                                    </li>							
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- End-Menu-Superior	-->
+                </div>
             </div>
-            <div class="col-lg-4" align="center">
-                <button class="btn btn-default" ng-click="paginar(parametros.page-1)" ng-disabled="parametros.page==1 || paginacion.totalPages==0">ANTERIOR</button>
-                <button class="btn btn-default" ng-click="paginar(parametros.page+1)" ng-disabled="parametros.page==paginacion.totalPages || paginacion.totalPages==0">SIGUIENTE</button>
-            </div>    
-            <div class="col-lg-4" align="right">
-                <button class="btn btn-default" ng-click="paginar(paginacion.totalPages)" ng-disabled="parametros.page==paginacion.totalPages || paginacion.totalPages==0">ULTIMA PAGINA</button>
-            </div>    
+            <div class="row">			
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <!-- Menu-Lateral	-->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Movimientos</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#/compras/registrar">Registrar Compra</a></li>
+                                <li><a href="#/ventas/registrar">Registrar Venta</a></li>
+                                <li><a href="#/ventas/registroMasivo">Carga Masiva de Ventas</a></li>
+                                <li><a href="#/compras/listar">Listar Compras</a></li>
+                                <li><a href="#/ventas/listar">Listar Ventas</a></li>
+                                <li><a href="#/factura/listar">Listar Facturas</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- End-Menu-Lateral	-->
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <!-- Contenido	-->
+                    <div ng-view="">
+
+                    </div>
+                    <!-- End-Contenido	-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <!-- Pie	-->
+                    <div class="well"> <center>
+					Miguel León - Marcelo Franco - Renato Fernández
+					</center></div>
+                    <!-- End-Pie	-->
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-lg-4">
-            </div>
-            <div class="col-lg-4" align="center">
-                <span>P&aacute;gina {{parametros.page}} de {{paginacion.totalPages}}</span>
-            </div>
-        </div>
-	</div>
-    <script type="text/javascript" src= "angular.min.js"></script>
-    <script type="text/javascript" src= "implementacion.js"></script>
-</body>
+
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+        <script src="js/vendor/bootstrap.js"></script>
+        <script src="js/main.js"></script>
+
+    </body>
 </html>

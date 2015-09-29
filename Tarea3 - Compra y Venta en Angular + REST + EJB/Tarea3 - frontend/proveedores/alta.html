@@ -1,0 +1,36 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Alta de Proveedores</h3>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal">
+            <fieldset>
+                <legend>Datos del Nuevo Proveedor</legend>
+                <div class="form-group">
+                    <label for="inputNombre" class="col-lg-2 control-label" >Nombre</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" id="inputNombre" placeholder="Nombre" type="text" ng-model="nombre">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputRuc" class="col-lg-2 control-label">RUC</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" id="inputRuc" placeholder="Ruc" type="text" ng-model="Ruc">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputDireccion" class="col-lg-2 control-label">Direci&oacuten</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" id="inputDireccion" placeholder="Dirección" type="text" ng-model="Direccion">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary" ng-click="alta()">Crear</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
