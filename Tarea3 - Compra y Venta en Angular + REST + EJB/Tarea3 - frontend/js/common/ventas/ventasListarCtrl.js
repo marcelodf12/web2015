@@ -10,7 +10,7 @@ App.controller('ventasListarCtrl', function($scope, $http, $location) {
     $scope.peticion= function(parametros){
                 //PETICION DEL RECURSO
                 $http({
-                    url: "http://localhost:8080/Tarea2-web/ventas",
+                    url: "http://localhost:8080/Tarea3-web/ventas",
                     method: "GET", 
 				    params: parametros
 				}).then(function(response){
@@ -106,7 +106,7 @@ App.controller('ventasListarCtrl', function($scope, $http, $location) {
             };
             //Listado General
             $http({
-                url: "http://localhost:8080/Tarea2-web/ventas",
+                url: "http://localhost:8080/Tarea3-web/ventas",
                 method: "GET"
             }).then(function(response){
 				$scope.ventas= convertirAVenta(response.data.ventas);
