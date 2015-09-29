@@ -22,7 +22,7 @@ public class CompraEjb {
         // TODO Auto-generated constructor stub
     }
     
-    @PersistenceContext(unitName= "Tarea2Ejb")
+    @PersistenceContext(unitName= "Tarea3Ejb")
     private EntityManager em;
 	
 	@Resource
