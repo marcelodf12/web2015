@@ -11,8 +11,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="proveedores")
-@NamedQuery(name="Proveedore.findAll", query="SELECT p FROM Proveedore p")
-public class Proveedore implements Serializable {
+@NamedQuery(name="Proveedore.findAll", query="SELECT p FROM Proveedor p")
+public class Proveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -26,10 +26,10 @@ public class Proveedore implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to Compra
-	@OneToMany(mappedBy="proveedore")
+	@OneToMany(mappedBy="proveedor")
 	private List<Compra> compras;
 
-	public Proveedore() {
+	public Proveedor() {
 	}
 
 	public String getRuc() {
@@ -74,14 +74,14 @@ public class Proveedore implements Serializable {
 
 	public Compra addCompra(Compra compra) {
 		getCompras().add(compra);
-		compra.setProveedore(this);
+		compra.setProveedor(this);
 
 		return compra;
 	}
 
 	public Compra removeCompra(Compra compra) {
 		getCompras().remove(compra);
-		compra.setProveedore(null);
+		compra.setProveedor(null);
 
 		return compra;
 	}
