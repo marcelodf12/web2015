@@ -5,7 +5,7 @@
         <artifactId>Tarea3</artifactId>
         <groupId>py.pol.una.web.tarea3</groupId>
         <version>0.1-SNAPSHOT</version>
-  </parent>
+    </parent>
 
   <artifactId>Tarea3-ear</artifactId>
   <packaging>ear</packaging>
@@ -14,8 +14,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
-	<dependencies>
+  
+  <dependencies>
   		<dependency>
             <groupId>py.pol.una.web.tarea3</groupId>
             <artifactId>Tarea3-model</artifactId>
@@ -35,7 +35,7 @@
 
   <build>
     <plugins>
-    	<plugin>
+    <plugin>
 		<groupId>org.jboss.as.plugins</groupId>
 		<artifactId>jboss-as-maven-plugin</artifactId>
 		<configuration>

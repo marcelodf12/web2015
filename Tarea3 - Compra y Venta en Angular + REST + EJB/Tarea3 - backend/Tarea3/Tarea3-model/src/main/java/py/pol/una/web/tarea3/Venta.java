@@ -1,48 +1,55 @@
 package py.pol.una.web.tarea3;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
+/**
+ * The persistent class for the ventas database table.
+ * 
+ */
 @Entity
-@Table(name="VENTA")
-public class Venta implements Serializable{
-
+@Table(name="ventas")
+@NamedQuery(name="Venta.findAll", query="SELECT v FROM Venta v")
+public class Venta implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@Column(name="numero")
-	private Integer numero;
-	
-	@Column(name="monto_total")
-	private Integer montoTotal;
-	
-	@Column(name="nombre_cliente")
-	@Size(min = 0, max = 50)
-	private String nombreCliente;
-	
-	@Column(name="ruc_cliente")
-	@Size(min = 0, max = 30)
-	private String rucCliente;
-	
-	@Column(name="fecha")
+
+	@Temporal(TemporalType.DATE)
 	private Date fecha;
 
-	public Integer getNumero() {
-		return numero;
+	@Column(name="monto_total")
+	private Integer montoTotal;
+
+	@Column(name="nombre_cliente")
+	private String nombreCliente;
+
+	@Id
+	private Integer numero;
+
+	//bi-directional many-to-one association to Cliente
+	@ManyToOne
+	@JoinColumn(name="ruc_cliente")
+	private Cliente cliente;
+
+	//bi-directional many-to-one association to Factura
+	@ManyToOne
+	@JoinColumn(name="id_factura")
+	private Factura factura;
+
+	public Venta() {
 	}
 
-	public void setNumero(Integer numero) {
-		this.numero = numero;
+	public Date getFecha() {
+		return this.fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public Integer getMontoTotal() {
-		return montoTotal;
+		return this.montoTotal;
 	}
 
 	public void setMontoTotal(Integer montoTotal) {
@@ -50,29 +57,35 @@ public class Venta implements Serializable{
 	}
 
 	public String getNombreCliente() {
-		return nombreCliente;
+		return this.nombreCliente;
 	}
 
 	public void setNombreCliente(String nombreCliente) {
 		this.nombreCliente = nombreCliente;
 	}
 
-	public String getRucCliente() {
-		return rucCliente;
+	public Integer getNumero() {
+		return this.numero;
 	}
 
-	public void setRucCliente(String rucCliente) {
-		this.rucCliente = rucCliente;
+	public void setNumero(Integer numero) {
+		this.numero = numero;
 	}
 
-	public Date getFecha() {
-		return fecha;
+	public Cliente getCliente() {
+		return this.cliente;
 	}
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
-	
-	
-	
+
+	public Factura getFactura() {
+		return this.factura;
+	}
+
+	public void setFactura(Factura factura) {
+		this.factura = factura;
+	}
+
 }

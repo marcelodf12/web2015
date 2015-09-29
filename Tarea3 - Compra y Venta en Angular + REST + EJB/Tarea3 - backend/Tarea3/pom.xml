@@ -27,10 +27,11 @@
            </dependency>
        </dependencies>
    </dependencyManagement>
-  <modules>
-  	<module>Tarea3-model</module>
-    <module>Tarea3-ejb</module>
-    <module>Tarea3-web</module>
-    <module>Tarea3-ear</module>
-  </modules>
+   	<modules>
+	    <module>Tarea3-model</module>
+	    <module>Tarea3-ejb</module>
+	    <module>Tarea3-web</module>
+	    <module>Tarea3-ear</module>
+	</modules>
+  
 </project>

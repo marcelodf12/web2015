@@ -3,6 +3,9 @@
 	<name>Tarea3-ear</name>
 	<comment></comment>
 	<projects>
+		<project>Tarea3-ejb</project>
+		<project>Tarea3-web</project>
+		<project>Tarea3-model</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

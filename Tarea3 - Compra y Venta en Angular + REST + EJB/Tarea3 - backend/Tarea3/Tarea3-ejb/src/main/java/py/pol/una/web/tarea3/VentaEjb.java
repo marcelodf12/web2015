@@ -1,10 +1,5 @@
 package py.pol.una.web.tarea3;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -29,7 +24,7 @@ public class VentaEjb {
         // TODO Auto-generated constructor stub
     }
     
-    @PersistenceContext(unitName= "Tarea3Ejb")
+    @PersistenceContext(unitName= "Tarea2Ejb")
     private EntityManager em;
 	
 	@Resource
@@ -53,13 +48,14 @@ public class VentaEjb {
             if (orderBy != null){
                 consulta += " ORDER BY " + orderBy + " " + orderDir + " ";
             }
-            Query q= em.createNativeQuery(consulta, Venta.class);
+            Query q= em.createNativeQuery(consulta);
             q.setFirstResult(inicio);
             q.setMaxResults(cantidad);
-            return q.getResultList();
+            List<Venta> ret= (List<Venta>) q.getResultList();
+            return ret;
         }catch(Exception e){
         	context.setRollbackOnly();
-        	throw e;
+        	throw new Exception(e.getMessage());
         }
 		
     }
@@ -87,4 +83,5 @@ public class VentaEjb {
         	throw new Exception(e.getMessage());
         }
     }
+
 }
