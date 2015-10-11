@@ -1,7 +1,9 @@
-package py.pol.una.web.tarea3;
+package py.pol.una.web.tarea3.modelos;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 import java.util.List;
 

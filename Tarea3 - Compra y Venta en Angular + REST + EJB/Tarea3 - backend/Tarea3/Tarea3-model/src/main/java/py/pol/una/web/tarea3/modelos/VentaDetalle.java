@@ -1,7 +1,16 @@
-package py.pol.una.web.tarea3;
+package py.pol.una.web.tarea3.modelos;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -29,6 +38,10 @@ public class VentaDetalle implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_producto")
 	private Producto producto;
+	
+	@ManyToOne
+	@JoinColumn(name="numero")
+	private Venta venta;
 
 	public VentaDetalle() {
 	}
@@ -71,6 +84,14 @@ public class VentaDetalle implements Serializable {
 
 	public void setProducto(Producto producto) {
 		this.producto = producto;
+	}
+
+	public Venta getVenta() {
+		return venta;
+	}
+
+	public void setVenta(Venta venta) {
+		this.venta = venta;
 	}
 
 }

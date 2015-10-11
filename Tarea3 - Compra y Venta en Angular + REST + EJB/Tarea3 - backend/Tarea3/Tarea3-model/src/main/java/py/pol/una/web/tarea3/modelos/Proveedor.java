@@ -1,18 +1,20 @@
-package py.pol.una.web.tarea3;
+package py.pol.una.web.tarea3.modelos;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
 /**
- * The persistent class for the clientes database table.
+ * The persistent class for the proveedores database table.
  * 
  */
 @Entity
-@Table(name="clientes")
-@NamedQuery(name="Cliente.findAll", query="SELECT c FROM Cliente c")
-public class Cliente implements Serializable {
+@Table(name="proveedores")
+@NamedQuery(name="Proveedore.findAll", query="SELECT p FROM Proveedor p")
+public class Proveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -25,11 +27,11 @@ public class Cliente implements Serializable {
 
 	private String nombre;
 
-	//bi-directional many-to-one association to Venta
-	@OneToMany(mappedBy="cliente")
-	private List<Venta> ventas;
+	//bi-directional many-to-one association to Compra
+	@OneToMany(mappedBy="proveedor")
+	private List<Compra> compras;
 
-	public Cliente() {
+	public Proveedor() {
 	}
 
 	public String getRuc() {
@@ -64,26 +66,26 @@ public class Cliente implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<Venta> getVentas() {
-		return this.ventas;
+	public List<Compra> getCompras() {
+		return this.compras;
 	}
 
-	public void setVentas(List<Venta> ventas) {
-		this.ventas = ventas;
+	public void setCompras(List<Compra> compras) {
+		this.compras = compras;
 	}
 
-	public Venta addVenta(Venta venta) {
-		getVentas().add(venta);
-		venta.setCliente(this);
+	public Compra addCompra(Compra compra) {
+		getCompras().add(compra);
+		compra.setProveedor(this);
 
-		return venta;
+		return compra;
 	}
 
-	public Venta removeVenta(Venta venta) {
-		getVentas().remove(venta);
-		venta.setCliente(null);
+	public Compra removeCompra(Compra compra) {
+		getCompras().remove(compra);
+		compra.setProveedor(null);
 
-		return venta;
+		return compra;
 	}
 
 }

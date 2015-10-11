@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jboss-web>
 	<context-root>
-		Tarea2-web
+		Tarea3-web
 	</context-root>
 </jboss-web>

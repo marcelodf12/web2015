@@ -1,8 +1,19 @@
-package py.pol.una.web.tarea3;
+package py.pol.una.web.tarea3.modelos;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -29,13 +40,16 @@ public class Venta implements Serializable {
 
 	//bi-directional many-to-one association to Cliente
 	@ManyToOne
-	@JoinColumn(name="ruc_cliente")
+	@JoinColumn(name="ruc_cliente", referencedColumnName="ruc")
 	private Cliente cliente;
 
 	//bi-directional many-to-one association to Factura
 	@ManyToOne
 	@JoinColumn(name="id_factura")
 	private Factura factura;
+	
+	@OneToMany(mappedBy="venta")
+	private List<VentaDetalle> ventaDetalles;
 
 	public Venta() {
 	}
@@ -86,6 +100,14 @@ public class Venta implements Serializable {
 
 	public void setFactura(Factura factura) {
 		this.factura = factura;
+	}
+
+	public List<VentaDetalle> getVentaDetalles() {
+		return ventaDetalles;
+	}
+
+	public void setVentaDetalles(List<VentaDetalle> ventaDetalles) {
+		this.ventaDetalles = ventaDetalles;
 	}
 
 }

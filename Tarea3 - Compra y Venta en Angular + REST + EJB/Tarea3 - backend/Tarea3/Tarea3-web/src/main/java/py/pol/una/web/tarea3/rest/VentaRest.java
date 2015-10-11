@@ -3,6 +3,9 @@ package py.pol.una.web.tarea3.rest;
 import java.util.List;
 
 
+
+
+
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.DefaultValue;
@@ -13,9 +16,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import py.pol.una.web.tarea3.ListaRespuesta;
-import py.pol.una.web.tarea3.Venta;
 import py.pol.una.web.tarea3.VentaEjb;
+import py.pol.una.web.tarea3.dto.VentaDTO;
+import py.pol.una.web.tarea3.modelos.Venta;
+import py.pol.una.web.tarea3.util.ListaRespuesta;
 
 @Path("ventas")
 @RequestScoped
@@ -43,7 +47,7 @@ public class VentaRest {
                             @QueryParam("fecha") String fecha,
                             @QueryParam("page") @DefaultValue("1") Integer page,
                             @QueryParam("cantidad") @DefaultValue("3") Integer cantidad) throws Exception {
-        List<Venta> lista = null;
+        List<VentaDTO> lista = null;
         Integer total= null;
         Integer totalPages= null;
         ListaRespuesta respuesta= null;
