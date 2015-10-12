@@ -14,7 +14,10 @@ App.config(['$routeProvider', function($routeProvider) {
                     templateUrl: 'clientes/listado.html',
                     controller: 'clienteListarCtrl'
                 })
-
+                .when('/cliente/registroMasivo', {
+                    templateUrl: 'cliente/registroMasivo.html',
+                    controller: 'clienteRegistroMasivoCtrl'
+                })
 
                 .when('/proveedor/alta', {
                     templateUrl: 'proveedores/alta.html',
