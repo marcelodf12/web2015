@@ -7,11 +7,11 @@ var App = angular.module("App", ['ngRoute']);
 App.config(['$routeProvider', function($routeProvider) {
         $routeProvider
                 .when('/cliente/alta', {
-                    templateUrl: 'clientes/alta.html',
+                    templateUrl: 'cliente/alta.html',
                     controller: 'clienteAltaCtrl'
                 })
                 .when('/cliente/listar', {
-                    templateUrl: 'clientes/listado.html',
+                    templateUrl: 'cliente/listado.html',
                     controller: 'clienteListarCtrl'
                 })
                 .when('/cliente/registroMasivo', {
