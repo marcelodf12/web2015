@@ -45,7 +45,7 @@ App.config(['$routeProvider', function($routeProvider) {
                 
                 .when('/ventas/registroMasivo', {
                     templateUrl: 'ventas/registroMasivo.html',
-                    controller: 'registroMasivoCtrl'
+                    controller: 'ventaRegistroMasivoCtrl'
                 })
 
                 .otherwise({RedirectTo: '/'});

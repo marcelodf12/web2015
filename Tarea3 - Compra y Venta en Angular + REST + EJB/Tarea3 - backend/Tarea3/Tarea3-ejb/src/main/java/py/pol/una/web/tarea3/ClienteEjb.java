@@ -102,7 +102,9 @@ public class ClienteEjb implements ClienteEjbLocal {
 		}
 		return errores;
 	}
-
+	
+	// TODO ver cual es la anotación para que no muera la transacción
+	//@Trasactional(noRollback=Exception)
 	private Boolean persistir(Cliente c) {
 		try {
 			//en ves de persist
