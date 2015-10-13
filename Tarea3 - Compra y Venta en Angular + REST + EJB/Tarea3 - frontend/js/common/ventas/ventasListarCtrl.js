@@ -119,7 +119,7 @@ App.controller('ventasListarCtrl', function($scope, $http, $location) {
     };
     //POPUP DE DOBLE CLICK
     $scope.obtener = function(x){
-        alert("Datos de la Venta:\n - Numero: " + x.numero + "\n - Monto Total: " + x.montoTotal + "\n - Nombre Cliente: " + x.nombreCliente + "\n - RUC Cliente: " + x.cliente.rucCliente + "\n - Fecha: " + x.fecha);
+        alert("Datos de la Venta:\n - Numero: " + x.numero + "\n - Monto Total: " + x.montoTotal + "\n - Nombre Cliente: " + x.nombreCliente + "\n - RUC Cliente: " + x.cliente.ruc + "\n - Fecha: " + x.fecha);
     };
     //Listado General
     $http({
@@ -131,5 +131,18 @@ App.controller('ventasListarCtrl', function($scope, $http, $location) {
     }, function(response){
         //ERROR
     });
+
+    $scope.exportar= function(metodo){
+        $scope.parametros.metodo= metodo;
+        $http({
+            url: "http://localhost:8080/Tarea3-web/ventas/exportar",
+            method: "POST", 
+            params: $scope.parametros
+        }).then(function(response){
+            //exito
+        }, function(response){
+            //ERROR
+        });
+    }
 
 });

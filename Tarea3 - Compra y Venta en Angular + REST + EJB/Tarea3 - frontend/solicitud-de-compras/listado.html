@@ -1,0 +1,21 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Lista de Solicitudes de Compras</h3>
+    </div>
+    <div class="panel-body"><form class="form-horizontal">
+	<div class ="form-group">
+		<table class="table table-hover">
+			    <tr>
+			      	<th>Nombre del Producto
+                    </th>
+			      	<th>Fecha de creación de la solicitud
+                    </th>
+			    </tr>
+		    	<tr ng-repeat="solicitud in solicitudes">
+			     	<td>{{solicitud.nombre}}</td>
+			      	<td>{{solicitud.fecha}}</td>
+		    	</tr>
+		  	</table>
+		  	<div ng-if="solicitudes.length == 0"><strong>Sin resultados</strong></div>
+	</div>
+</div>
