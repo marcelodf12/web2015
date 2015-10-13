@@ -3,6 +3,7 @@ package py.pol.una.web.tarea3;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import javax.persistence.Query;
 
 import py.pol.una.web.tarea3.dto.ProductoDTO;
 import py.pol.una.web.tarea3.modelos.Producto;
+import py.pol.una.web.tarea3.modelos.SolicitudCompra;
 
 @Stateless
 @LocalBean
@@ -154,7 +156,7 @@ public class ProductoEjb {
     
     public void exportacion(Producto producto, String orderBy, String orderDir, String metodo) throws Exception{
     	try{
-    		String nombreArchivo= "C:/VENTAS." + metodo;
+    		String nombreArchivo= "C:/PRODUCTOS." + metodo;
         	File fichero= new File(nombreArchivo);
         	if (fichero.exists()) fichero.delete();
         	Integer inicio= 0;
@@ -171,16 +173,16 @@ public class ProductoEjb {
         		for (ProductoDTO p: lista){
         			if (p != null){
         				if (metodo.compareTo("CVS")==0){
-                			fw.write("\n" + p.getId().toString() + ", ");
+                			fw.write("\n" + p.getId() + ", ");
                 			fw.write("\"" + p.getNombre() + "\", ");
-                			fw.write(p.getPrecio().toString() + ", ");
-                			fw.write(p.getStock().toString() );;
+                			fw.write(p.getPrecio() + ", ");
+                			fw.write(p.getStock() );;
                 		}else{
                 			if (yaExisteJson) fw.write(",");
-                			fw.write("{\"id\":" + p.getId().toString() + ",");
+                			fw.write("{\"id\":" + p.getId() + ",");
                 			fw.write("\"nombre\":" + "\"" + p.getNombre() + "\",");
                 			fw.write("\"precio\":" +  p.getPrecio() + ",");
-                			fw.write("\"stock\":"  + p.getStock() + ", ");
+                			fw.write("\"stock\":"  + p.getStock() + "}");
                 			yaExisteJson= true;
                 		}
         			}
@@ -191,6 +193,26 @@ public class ProductoEjb {
         	if (metodo.compareTo("JSON")==0) fw.write("]");
         	fw.flush();
         	fw.close();
+    	}catch(Exception e){
+    		context.setRollbackOnly();
+    		throw e;
+    	}
+    }
+    
+    public void inventario() throws Exception{
+    	try{
+    		Query q= em.createNativeQuery("SELECT * FROM PRODUCTOS WHERE STOCK<10", Producto.class);
+            List<Producto> lista= q.getResultList();
+            for (Producto p: lista){
+            	SolicitudCompra s= new SolicitudCompra();
+            	s.setNombre(p.getNombre());
+            	s.setFecha(new Date());	
+            	if (em.find(SolicitudCompra.class, s.getNombre())== null){
+            		em.persist(s);
+            	}else{
+            		em.merge(s);
+            	}
+            }
     	}catch(Exception e){
     		context.setRollbackOnly();
     		throw e;

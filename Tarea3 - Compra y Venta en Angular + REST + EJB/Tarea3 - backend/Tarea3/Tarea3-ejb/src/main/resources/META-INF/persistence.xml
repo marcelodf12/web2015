@@ -10,6 +10,7 @@
     <class>py.pol.una.web.tarea3.modelos.Factura</class>
     <class>py.pol.una.web.tarea3.modelos.Venta</class>
     <class>py.pol.una.web.tarea3.modelos.VentaDetalle</class>
+    <class>py.pol.una.web.tarea3.modelos.SolicitudCompra</class>
     <properties>
       <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>      
