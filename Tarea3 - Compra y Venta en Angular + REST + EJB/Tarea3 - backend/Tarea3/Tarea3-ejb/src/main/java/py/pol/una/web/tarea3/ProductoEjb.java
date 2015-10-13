@@ -156,13 +156,13 @@ public class ProductoEjb {
     
     public void exportacion(Producto producto, String orderBy, String orderDir, String metodo) throws Exception{
     	try{
-    		String nombreArchivo= "C:/PRODUCTOS." + metodo;
+    		String nombreArchivo= "C:/productos." + metodo;
         	File fichero= new File(nombreArchivo);
         	if (fichero.exists()) fichero.delete();
         	Integer inicio= 0;
         	Integer cantidad= 3;//Cuantos elementos va a cargar en memoria
         	FileWriter fw = new FileWriter(fichero);
-        	if (metodo.compareTo("CVS")==0){
+        	if (metodo.compareTo("cvs")==0){
         		fw.write("ID, NOMBRE, PRECIO, STOCK");
         	}else{
         		fw.write("[");
@@ -172,11 +172,11 @@ public class ProductoEjb {
         	while (lista.size() != 0){
         		for (ProductoDTO p: lista){
         			if (p != null){
-        				if (metodo.compareTo("CVS")==0){
+        				if (metodo.compareTo("cvs")==0){
                 			fw.write("\n" + p.getId() + ", ");
                 			fw.write("\"" + p.getNombre() + "\", ");
                 			fw.write(p.getPrecio() + ", ");
-                			fw.write(p.getStock() );;
+                			fw.write(p.getStock() );
                 		}else{
                 			if (yaExisteJson) fw.write(",");
                 			fw.write("{\"id\":" + p.getId() + ",");
@@ -190,7 +190,7 @@ public class ProductoEjb {
         		inicio+=cantidad;
         		lista= listar(inicio, cantidad, orderBy, orderDir, producto);
         	}  	
-        	if (metodo.compareTo("JSON")==0) fw.write("]");
+        	if (metodo.compareTo("json")==0) fw.write("]");
         	fw.flush();
         	fw.close();
     	}catch(Exception e){

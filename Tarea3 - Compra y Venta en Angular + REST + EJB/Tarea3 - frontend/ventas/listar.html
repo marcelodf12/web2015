@@ -16,11 +16,10 @@
                 <div class="col-lg-4">
                     <select class="form-control" ng-model="categoria">
                         <option value="" disabled selected>Filtro por categor&iacute;as</option>
-                        <option value="by_numero" selected>N&uacute;mero</option>
-                        <option value="by_monto_total">Monto Total</option>
-                        <option value="by_nombre_cliente">Nombre Cliente</option>
-                        <option value="by_ruc_cliente">RUC Cliente</option>
-                        <option value="by_fecha">Fecha</option>
+                        <option value="1" selected>N&uacute;mero</option>
+                        <option value="2">Monto Total</option>
+                        <option value="3">Nombre Cliente</option>
+                        <option value="4">RUC Cliente</option>
                     </select>
                 </div>
                 <div class="col-lg-4">
@@ -35,75 +34,70 @@
 		<table class="table table-hover">
 			    <tr>
 			      	<th>N&uacute;mero 
-                        <button class="btn btn-default" ng-click="ordenar('numero', 'ASC')" ng-show="numOrd">&uArr;</button>
-                        <button class="btn btn-default" ng-click="ordenar('numero', 'DESC')" ng-hide="numOrd">&dArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('1', 'ASC')" ng-show="numOrd">&uArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('1', 'DESC')" ng-hide="numOrd">&dArr;</button>
                     </th>
 			      	<th>Monto Total
-                        <button class="btn btn-default" ng-click="ordenar('monto_total', 'ASC')" ng-show="monOrd">&uArr;</button>
-                        <button class="btn btn-default" ng-click="ordenar('monto_total', 'DESC')" ng-hide="monOrd">&dArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('2', 'ASC')" ng-show="monOrd">&uArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('2', 'DESC')" ng-hide="monOrd">&dArr;</button>
                     </th>
 			      	<th>Nombre Cliente
-                        <button class="btn btn-default" ng-click="ordenar('nombre_cliente', 'ASC')" ng-show="nomOrd">&uArr;</button>
-                        <button class="btn btn-default" ng-click="ordenar('nombre_cliente', 'DESC')" ng-hide="nomOrd">&dArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('3', 'ASC')" ng-show="nomOrd">&uArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('3', 'DESC')" ng-hide="nomOrd">&dArr;</button>
                     </th>
 			      	<th>RUC Cliente
-                        <button class="btn btn-default" ng-click="ordenar('ruc_cliente', 'ASC')" ng-show="rucOrd">&uArr;</button>
-                        <button class="btn btn-default" ng-click="ordenar('ruc_cliente', 'DESC')" ng-hide="rucOrd">&dArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('4', 'ASC')" ng-show="rucOrd">&uArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('4', 'DESC')" ng-hide="rucOrd">&dArr;</button>
                     </th>
 			      	<th>Fecha
-                        <button class="btn btn-default" ng-click="ordenar('fecha', 'ASC')" ng-show="fecOrd">&uArr;</button>
-                        <button class="btn btn-default" ng-click="ordenar('fecha', 'DESC')" ng-hide="fecOrd">&dArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('5', 'ASC')" ng-show="fecOrd">&uArr;</button>
+                        <button class="btn btn-default" ng-click="ordenar('5', 'DESC')" ng-hide="fecOrd">&dArr;</button>
                     </th>
 			    </tr>
 		    	<tr ng-repeat="venta in ventas" ng-dblclick="obtener(venta)">
 			     	<td>{{venta.numero}}</td>
-			      	<td>{{venta.monto_total}}</td>
-			      	<td>{{venta.nombre_cliente}}</td>
-			      	<td>{{venta.ruc_cliente}}</td>
+			      	<td>{{venta.montoTotal}}</td>
+			      	<td>{{venta.nombreCliente}}</td>
+			      	<td>{{venta.cliente.ruc}}</td>
 			      	<td>{{venta.fecha}}</td>
 		    	</tr>
 		  	</table>
 		  	<div ng-if="ventas.length == 0"><strong>Sin resultados</strong></div>
-	    	<div class="midirectiva"></div>
 	</div>
-	
 	<div class="form-group">
             <div class="col-lg-4">
                 <button class="btn btn-default"
                 		ng-click="paginar(1)"
-                		ng-disabled="parametros.page==1 || paginacion.total_pages==0">
+                		ng-disabled="parametros.page==1 || paginacion.totalPages==0">
                 	PRIMERA PAGINA
                 </button>
             </div>
             <div class="col-lg-4" align="center">
                 <button class="btn btn-default"
                 		ng-click="paginar(parametros.page-1)"
-                		ng-disabled="parametros.page==1 || paginacion.total_pages==0">
+                		ng-disabled="parametros.page==1 || paginacion.totalPages==0">
                 	ANTERIOR
                 </button>
                 <button class="btn btn-default"
                 		ng-click="paginar(parametros.page+1)"
-                		ng-disabled="parametros.page==paginacion.total_pages || paginacion.total_pages==0">
+                		ng-disabled="parametros.page==paginacion.totalPages || paginacion.totalPages==0">
                 	SIGUIENTE
                 </button>
             </div>    
             <div class="col-lg-4" align="right">
                 <button class="btn btn-default"
-                		ng-click="paginar(paginacion.total_pages)"
-                		ng-disabled="parametros.page==paginacion.total_pages || paginacion.total_pages==0">
+                		ng-click="paginar(paginacion.totalPages)"
+                		ng-disabled="parametros.page==paginacion.totalPages || paginacion.totalPages==0">
                 	ULTIMA PAGINA
                 </button>
             </div>    
         </div>
-        
-        
         <div class="form-group">
             <div class="col-lg-4">
             </div>
             <div class="col-lg-4" align="center">
-                <span>P&aacute;gina {{parametros.page}} de {{paginacion.total_pages}}</span>
+                <span>P&aacute;gina {{parametros.page}} de {{paginacion.totalPages}}</span>
             </div>
-        </div> 
-
+        </div>
      </div></div>
 </div>

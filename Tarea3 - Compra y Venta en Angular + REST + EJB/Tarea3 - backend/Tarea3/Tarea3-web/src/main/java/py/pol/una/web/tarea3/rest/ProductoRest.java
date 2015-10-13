@@ -106,7 +106,7 @@ public class ProductoRest {
 			Producto producto,
 			@QueryParam("orderBy") String orderBy,
 			@QueryParam("orderDir") String orderDir,
-			@QueryParam("metodo") @DefaultValue("JSON") String metodo
+			@QueryParam("metodo") @DefaultValue("json") String metodo
 			) throws Exception{
 		productoEjb.exportacion(producto, orderBy, orderDir, metodo);
 		return Response.ok().header("Access-Control-Allow-Origin", "*").build();
