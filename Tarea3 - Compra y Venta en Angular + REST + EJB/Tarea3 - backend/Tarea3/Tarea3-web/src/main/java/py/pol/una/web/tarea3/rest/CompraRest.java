@@ -5,9 +5,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,6 +20,8 @@ import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
+import py.pol.una.web.tarea3.CompraEjb;
+
 @Path("/compras")
 public class CompraRest {
 	
@@ -25,7 +29,11 @@ public class CompraRest {
 		
 	}
 
-	private final String UPLOADED_FILE_PATH = "/tmp/jboss/";
+	@EJB
+	private CompraEjb compraEjb;
+	
+	
+	private final String UPLOADED_FILE_PATH = "c:\\jboss\\";
 	
 	@POST
 	@Path("/file")
@@ -53,7 +61,13 @@ public class CompraRest {
 			fileName = UPLOADED_FILE_PATH + fileName;
 				
 			writeFile(bytes,fileName);
-				
+			
+			ArrayList<Integer> errores = compraEjb.cargaMasiva(fileName);
+			for (Integer i : errores) {
+				System.out.println("Error en la linea " + i.toString());
+			}
+
+			
 			System.out.println("Done");
 
 		  } catch (IOException e) {
