@@ -16,6 +16,7 @@ import javax.persistence.Query;
 import py.pol.una.web.tarea3.dto.VentaDTO;
 import py.pol.una.web.tarea3.modelos.Cliente;
 import py.pol.una.web.tarea3.modelos.Venta;
+import py.pol.una.web.tarea3.modelos.VentaDetalle;
 
 /**
  * Session Bean implementation class VentaEjb
@@ -48,11 +49,19 @@ public class VentaEjb {
 		}
 	}
 	
-	public void insert(Venta venta) throws Exception{
+	public void insert(Venta venta, List<VentaDetalle> detalles) throws Exception{
 		try{
 			Cliente c= em.find(Cliente.class, venta.getCliente().getRuc());
 			if (c== null) throw new Exception("No existe el cliente al que se realiza la Venta"); 
-			em.persist(venta);
+			em.persist(venta); //Persistimos la cabecera...
+			for (VentaDetalle d: detalles){
+				if (d.getCantidad()> d.getProducto().getStock()){
+					throw new Exception("Cantidad insuficiente en STOCK de ... " + d.getProducto().getNombre());
+				}
+				d.getProducto().setStock(d.getProducto().getStock()-d.getCantidad());
+				em.persist(d.getProducto());
+				em.persist(d);
+			}		
 		}catch(Exception e){
 			context.setRollbackOnly();
 			throw e;
