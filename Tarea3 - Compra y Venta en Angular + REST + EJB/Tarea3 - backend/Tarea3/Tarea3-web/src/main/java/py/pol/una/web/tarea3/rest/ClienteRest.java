@@ -32,7 +32,7 @@ public class ClienteRest {
 	@EJB
 	private ClienteEjb clienteEjb;
 
-	private final String UPLOADED_FILE_PATH = "/tmp/jboss/";
+	private final String UPLOADED_FILE_PATH = "C:\\jboss\\";
 
 	@POST
 	@Path("/file")
