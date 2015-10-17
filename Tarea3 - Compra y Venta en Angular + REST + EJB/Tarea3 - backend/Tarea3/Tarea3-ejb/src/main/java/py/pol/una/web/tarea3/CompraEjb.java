@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
@@ -47,47 +48,70 @@ public class CompraEjb {
 		String splitBy = ";";
 		Boolean formato;
 		Integer numeroDeLinea = 0;
+		Compra CompraNuevo;
+		CompraDetalle nuevoDetalle;
+		Proveedor p;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 
 			br = new BufferedReader(new FileReader(file));
 			while ((line = br.readLine()) != null) {
+				System.out.println("---- LINEA NUMERO " + Integer.valueOf(numeroDeLinea + 1) + "----");
+				System.out.println(line);
 				numeroDeLinea++;
 				String[] element = line.split(splitBy);
-				Compra CompraNuevo = new Compra();
+				for (String s : element) {
+					System.out.println(s);
+				}
+				CompraNuevo = new Compra();
 
 				try {
 					formato = true;
 					if (element[0].compareTo("") != 0 && element[1].compareTo("") != 0
 							&& element[2].compareTo("") != 0) {
-						Proveedor p;
 						try {
+							System.out.println(1);
 							p = (Proveedor) em.find(Proveedor.class, element[0]);
 						} catch (Exception e) {
+							System.out.println("No se encontró el proveedor");
 							formato = false;
 							p = null;
 						}
+						System.out.println(2);
 						CompraNuevo.setProveedor(p);
+						System.out.println(3);
 						CompraNuevo.setMontoTotal(Integer.valueOf(element[1]));
-						CompraNuevo.setFecha(Date.valueOf(element[2]));
-
+						System.out.println(4);
+						CompraNuevo.setFecha(sdf.parse(element[2]));
+						System.out.println(5);
 						Integer pos = 3;
+						System.out.println(6);
 						ArrayList<CompraDetalle> listaDetalle = new ArrayList<CompraDetalle>();
+						
 						if ((element.length - 3) % 3 == 0) {
 							while (pos < element.length) {
-								CompraDetalle nuevoDetalle = new CompraDetalle();
+								System.out.print(" ## Detalles ## ");
+								System.out.println(Integer.valueOf(pos) + " " + Integer.valueOf(pos + 1) + " "
+										+ Integer.valueOf(pos + 2));
+								System.out.println(element[pos]);
+								System.out.println(element[pos + 1]);
+								System.out.println(element[pos + 2]);
+								nuevoDetalle = new CompraDetalle();
 								Producto pro;
 								try {
-									pro = (Producto) em.find(Producto.class, element[pos]);
+									pro = (Producto) em.find(Producto.class, Integer.valueOf(element[pos]));
 									nuevoDetalle.setProducto(pro);
-									nuevoDetalle.setCantidad(Integer.valueOf(element[++pos]));
-									nuevoDetalle.setPrecio(Integer.valueOf(element[++pos]));
+									nuevoDetalle.setCantidad(Integer.valueOf(element[pos+1]));
+									nuevoDetalle.setPrecio(Integer.valueOf(element[pos+2]));
 									nuevoDetalle.setCompra(CompraNuevo);
-									pro.setStock(pro.getStock()+nuevoDetalle.getCantidad());
+									pro.setStock(pro.getStock() + nuevoDetalle.getCantidad());
 									listaDetalle.add(nuevoDetalle);
 								} catch (Exception e) {
+									System.out.println("No se encontro del producto");
 									pro = null;
 									formato = false;
 								}
+								pos+=3;
 							}
 
 						} else {
@@ -100,6 +124,7 @@ public class CompraEjb {
 					}
 				} catch (Exception e) {
 					System.out.println("Salto excepcion por campos vacios");
+					System.out.println("Ex" +  e.getMessage());
 					formato = false;
 				}
 				if (formato) {

@@ -18,7 +18,8 @@ public class Producto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "producto_seq_gen")
+	@SequenceGenerator(name = "producto_seq_gen", sequenceName = "seq_producto")
 	private Integer id;
 
 	private Boolean activo;

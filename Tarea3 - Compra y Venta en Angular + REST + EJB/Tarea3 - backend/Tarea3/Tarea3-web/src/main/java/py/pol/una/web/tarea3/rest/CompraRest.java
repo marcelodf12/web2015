@@ -79,9 +79,9 @@ public class CompraRest {
 		
 		try{
 			java.net.URI location = new java.net.URI("http://localhost:8000/");
-			return Response.seeOther(location).build();
+			return Response.seeOther(location).header("Access-Control-Allow-Origin", "*").build();
 	    }catch(URISyntaxException e){
-	    	return Response.status(500).entity("ERROR interno").build();
+	    	return Response.status(500).entity("ERROR interno").header("Access-Control-Allow-Origin", "*").build();
 	    }
 	}
 

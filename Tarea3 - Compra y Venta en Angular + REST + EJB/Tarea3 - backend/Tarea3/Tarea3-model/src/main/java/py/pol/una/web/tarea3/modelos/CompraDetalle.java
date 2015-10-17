@@ -16,7 +16,8 @@ public class CompraDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "compra_detalle_seq_gen")
+	@SequenceGenerator(name = "compra_detalle_seq_gen", sequenceName = "seq_compra_detalle")
 	private Integer id;
 
 	private Integer cantidad;
