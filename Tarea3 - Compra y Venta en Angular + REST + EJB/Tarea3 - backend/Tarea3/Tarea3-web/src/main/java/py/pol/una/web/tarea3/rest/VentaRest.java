@@ -7,6 +7,7 @@ import java.util.List;
 
 
 
+
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
@@ -27,6 +28,7 @@ import com.google.gson.Gson;
 import py.pol.una.web.tarea3.VentaEjb;
 import py.pol.una.web.tarea3.dto.VentaDTO;
 import py.pol.una.web.tarea3.modelos.Venta;
+import py.pol.una.web.tarea3.modelos.VentaDetalle;
 import py.pol.una.web.tarea3.util.ListaRespuesta;
 
 @Path("ventas")
@@ -50,8 +52,8 @@ public class VentaRest {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response insert(Venta venta)throws Exception{
-		ventaEjb.insert(venta);
+	public Response insert(Venta venta, List<VentaDetalle> detalles)throws Exception{
+		ventaEjb.insert(venta, detalles);
 		return Response.ok().header("Access-Control-Allow-Origin", "*").build();
 	}
 	

@@ -47,7 +47,10 @@ App.config(['$routeProvider', function($routeProvider) {
                     templateUrl: 'ventas/registroMasivo.html',
                     controller: 'ventaRegistroMasivoCtrl'
                 })
-
+                .when('/ventas/registrarVenta', {
+                    templateUrl: 'ventas/registrar.html',
+                    controller: 'ventaResgistroCtrl'
+                })
                 .when('/solicitud/listar',{
                     templateUrl: 'solicitud-de-compras/listado.html',
                     controller: 'solicitudListarCtrl'
