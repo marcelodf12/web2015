@@ -172,7 +172,7 @@ public class VentaEjb {
     
     public void exportacion(Venta venta, String orderBy, String orderDir, String metodo) throws Exception{
     	try{
-    		String nombreArchivo= "C:/ventas." + metodo;
+    		String nombreArchivo= "C:\\jboss\\ventas." + metodo;
         	File fichero= new File(nombreArchivo);
         	if (fichero.exists()) fichero.delete();
         	Integer inicio= 0;
