@@ -1,19 +1,11 @@
 package py.pol.una.web.tarea3;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.TimerService;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
-import py.pol.una.web.tarea3.modelos.Producto;
-import py.pol.una.web.tarea3.modelos.SolicitudCompra;
 
 @Singleton
 public class InventarioTimer {

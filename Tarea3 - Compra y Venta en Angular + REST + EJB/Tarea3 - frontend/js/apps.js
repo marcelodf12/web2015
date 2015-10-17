@@ -48,7 +48,7 @@ App.config(['$routeProvider', function($routeProvider) {
                     controller: 'ventaRegistroMasivoCtrl'
                 })
 
-                .when('solicitud/listar',{
+                .when('/solicitud/listar',{
                     templateUrl: 'solicitud-de-compras/listado.html',
                     controller: 'solicitudListarCtrl'
                 })
