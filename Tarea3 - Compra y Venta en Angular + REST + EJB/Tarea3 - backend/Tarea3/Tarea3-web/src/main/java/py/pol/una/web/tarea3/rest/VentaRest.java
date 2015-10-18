@@ -52,8 +52,8 @@ public class VentaRest {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response insert(Venta venta, List<VentaDetalle> detalles)throws Exception{
-		ventaEjb.insert(venta, detalles);
+	public Response insert(Venta venta)throws Exception{
+		ventaEjb.insert(venta);
 		return Response.ok().header("Access-Control-Allow-Origin", "*").build();
 	}
 	
